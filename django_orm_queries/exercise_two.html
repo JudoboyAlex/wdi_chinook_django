@@ -1,0 +1,74 @@
+Find the album titled "Vinicius De Moraes", and then use the relationship-provided method to find all its tracks.
+
+>>> Album.objects.get(title = "Vinicius De Moraes")
+<Album: Album object (243)>
+>>> Track.objects.filter(album='243')
+<QuerySet [<Track: Track object (3073)>, <Track: Track object (3074)>, <Track: Track object (3064)>, <Track: Track object (3080)>, <Track: Track object (3079)>, <Track: Track object (3078)>, <Track: Track object (3077)>, <Track: Track object (3076)>, <Track: Track object (3075)>, <Track: Track object (3072)>, <Track: Track object (3071)>, <Track: Track object (3070)>, <Track: Track object (3069)>, <Track: Track object (3068)>, <Track: Track object (3067)>, <Track: Track object (3066)>, <Track: Track object (3065)>]>
+    
+Find the artist called "Philip Glass Ensemble", and then use an relationship-provided method to find all their albums.
+
+>>> Artist.objects.get(name = "Philip Glass Ensemble")
+<Artist: Artist object (275)>
+>>> Album.objects.get(artist = 275)
+<Album: Album object (343)>
+
+
+Find the "Brazilian Music" playlist and then use an relationship-provided method to find all its tracks.
+
+>>> Playlist.objects.filter(name = "Brazilian Music")
+<QuerySet [<Playlist: Playlist object (11)>]>
+>>> Track.objects.filter(playlists=11)
+<QuerySet [<Track: Track object (215)>, <Track: Track object (219)>, <Track: Track object (220)>, <Track: Track object (228)>, <Track: Track object (236)>, <Track: Track object (391)>, <Track: Track object (393)>, <Track: Track object (504)>, <Track: Track object (516)>, <Track: Track object (523)>, <Track: Track object (738)>, <Track: Track object (867)>, <Track: Track object (852)>, <Track: Track object (864)>, <Track: Track object (874)>, <Track: Track object (885)>, <Track: Track object (888)>, <Track: Track object (1088)>, <Track: Track object (1093)>, <Track: Track object (1099)>, '...(remaining elements truncated)...']>
+
+
+
+Find the "Jazz" genre and then use an relationship-provided method to find all its tracks.
+
+>>> Genre.objects.get(name = "Jazz")
+<Genre: Genre object (2)>
+>>> Track.objects.filter(genre = 2)
+<QuerySet [<Track: Track object (63)>, <Track: Track object (64)>, <Track: Track object (65)>, <Track: Track object (66)>, <Track: Track object (67)>, <Track: Track object (68)>, <Track: Track object (70)>, <Track: Track object (71)>, <Track: Track object (72)>, <Track: Track object (75)>, <Track: Track object (76)>, <Track: Track object (123)>, <Track: Track object (124)>, <Track: Track object (126)>, <Track: Track object (127)>, <Track: Track object (128)>, <Track: Track object (129)>, <Track: Track object (130)>, <Track: Track object (74)>, <Track: Track object (456)>, '...(remaining elements truncated)...']>
+
+
+Find the track "My Time After Awhile" and then use the track/genre relationship to find its genre.
+
+>>> Track.objects.get(name = "My Time After Awhile")
+<Track: Track object (202)>
+>>> Genre.objects.get(genres=202)
+<Genre: Genre object (6)>
+
+Now find the media type of that same track.
+
+>>> MediaType.objects.get(medias = 202).name
+'MPEG audio file'
+
+And finally, find the album that track appears on.
+
+>>> Album.objects.get(albums =202).title
+'Afrociberdelia'
+
+Add through relationships to Chinook that will allow you to make the following queries: Test them out in the Django shell to make sure it worked.
+
+Genre.objects.get(pk=1).media_types.all()
+
+add media_types as foreignkey under Genre
+
+Genre.objects.get(pk=1).albums.all()
+
+add albums as foreignkey under Genre
+
+MediaType.objects.get(pk=1).genres.all()
+
+add genres as foreignkey under MediaType
+
+MediaType.objects.get(pk=1).albums.all()
+
+add albums as foreignkey under MediaType
+
+Album.objects.get(pk=1).genres.all()
+
+add genres as foreignkey under Album
+
+Album.objects.get(pk=1).media_types.all()
+
+add media_types as foreignkey under Album
